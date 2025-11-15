@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>EF Data Collection Form</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+    body { font-family: Arial, sans-serif; background:#f2f2f2; padding:20px; }
+    .container { background:#fff; max-width:500px; padding:20px; margin:auto; border-radius:10px; box-shadow:0 0 10px #ccc; }
+    h2 { text-align:center; margin-bottom:5px; }
+    .sub-header { text-align:center; font-size:14px; color:#444; margin-bottom:20px; }
+    label { font-weight:bold; margin-top:10px; display:block; }
+    input, select { width:100%; padding:10px; margin-top:5px; border:1px solid #ccc; border-radius:5px; }
+    button { background:#007bff; color:white; padding:12px; margin-top:20px; border:none; width:100%; border-radius:5px; cursor:pointer; font-size:16px; }
+    button:hover { background:#0056b3; }
+    .error { color:red; font-size:14px; margin-top:5px; }
+</style>
+</head>
+
+<body>
+<div class="container">
+    
+    <h2>EF Data Collection Form</h2>
+    <div class="sub-header"><b>ERO SUMERPUR • AC-121 • SIR 2026</b></div>
+
+    <label>Supervisor Name</label>
+    <select id="supervisor" required>
+        <option value="">-- Select --</option>
+        <option>Sh. MangiLal Dewasi</option>
+        <option>Sh. Kishore Kumar Soni</option>
+        <option>Sh. Bharat Lal Sharma</option>
+        <option>Sh. Mahesh Sonal</option>
+        <option>Sh. Chandra Kant Nanda</option>
+        <option>Sh. Mankchand Sharma</option>
+        <option>Sh. Vijay Kumar Jangid</option>
+        <option>Sh. Bheru Singh</option>
+        <option>Sh. Vikram Singh</option>
+        <option>Sh. Jay Prakash</option>
+        <option>Sh. Sanjay Gehlot</option>
+        <option>Sh. Bajrang Singh Charan</option>
+        <option>Sh. Rajesh Kumar</option>
+        <option>SH. Chandan Singh Rajpurohit</option>
+        <option>Sh. Inder Kumar Sain</option>
+        <option>Sh. Shivlal Choudhary</option>
+        <option>Sh. Kishan Lal</option>
+        <option>Sh. Shankar Lal Meena</option>
+        <option>Sh. Abhinav Khatri</option>
+        <option>Sh. Meetha Ram</option>
+        <option>Sh. Nema Ram</option>
+        <option>Sh. Dalpat Singh Deora</option>
+        <option>Sh. Ghisulal Borana</option>
+        <option>Sh Rakesh Kumar Prajapati</option>
+        <option>Sh. Naresh Kumar Parihar</option>
+        <option>Sh. Bhanwar Lal Parihar</option>
+        <option>Sh. Himatram Gehlot</option>
+        <option>Sh. Pradeep Vaishnav</option>
+        <option>Sh. Rakesh Kumar Malviya</option>
+    </select>
+
+    <label>Date</label>
+    <input type="date" id="date" required>
+
+    <label>Part Number</label>
+    <input type="number" id="partNo" min="1" max="500" required>
+
+    <label>Total EF Distributed</label>
+    <input type="number" id="distributed" min="0" max="2000" required>
+
+    <label>Total EF Collected</label>
+    <input type="number" id="collected" min="0" required>
+
+    <label>Total EF Digitized</label>
+    <input type="number" id="digitized" min="0" required>
+
+    <div id="error" class="error"></div>
+
+    <button onclick="validateForm()">Submit</button>
+</div>
+
+<script>
+function validateForm() {
+    let supervisor = document.getElementById("supervisor").value;
+    let date = document.getElementById("date").value;
+    let partNo = document.getElementById("partNo").value;
+    let distributed = parseInt(document.getElementById("distributed").value);
+    let collected = parseInt(document.getElementById("collected").value);
+    let digitized = parseInt(document.getElementById("digitized").value);
+    let err = document.getElementById("error");
+
+    err.innerHTML = "";
+
+    if (!supervisor || !date || !partNo || isNaN(distributed) || isNaN(collected) || isNaN(digitized)) {
+        err.innerHTML = "All fields are mandatory!";
+        return;
+    }
+
+    let today = new Date().toISOString().split("T")[0];
+    if (date > today) {
+        err.innerHTML = "Future dates are not allowed!";
+        return;
+    }
+
+    if (collected > distributed) {
+        err.innerHTML = "Collected cannot be greater than Distributed!";
+        return;
+    }
+
+    if (digitized > collected) {
+        err.innerHTML = "Digitized cannot be greater than Collected!";
+        return;
+    }
+
+    alert("Form Submitted Successfully!");
+}
+</script>
+
+</body>
+</html>
