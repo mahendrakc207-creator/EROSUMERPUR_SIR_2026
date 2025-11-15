@@ -78,6 +78,13 @@
 </div>
 
 <script>
+    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbxaOVABT11LAOP2MCoRPzTyB6Y8KK_Y-CXp_hBRBw1iL4maiHddYsyviyavAzq4BOhJ/exec";
+function qs(id){return document.getElementById(id)}
+function show(msg, cls){
+  const el = qs('msg');
+  el.className = cls||'';
+  el.innerText = msg;
+}
 function validateForm() {
     let supervisor = document.getElementById("supervisor").value;
     let date = document.getElementById("date").value;
@@ -116,3 +123,4 @@ function validateForm() {
 
 </body>
 </html>
+
